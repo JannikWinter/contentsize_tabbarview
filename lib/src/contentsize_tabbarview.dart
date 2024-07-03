@@ -12,6 +12,8 @@ class ContentSizeTabBarView extends StatefulWidget {
     this.controller,
     this.physics,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.animationDuration = const Duration(milliseconds: 100),
+    this.animationCurve = Curves.easeInOutCubic,
   }) : super(key: key);
 
   /// This widget's selection and animation state.
@@ -39,6 +41,9 @@ class ContentSizeTabBarView extends StatefulWidget {
 
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
+  
+  final Duration animationDuration;
+  final Curve animationCurve;
 
   @override
   State<ContentSizeTabBarView> createState() => _ContentSizeTabBarViewState();
@@ -215,6 +220,8 @@ class _ContentSizeTabBarViewState extends State<ContentSizeTabBarView> {
         physics: widget.physics == null
             ? const PageScrollPhysics().applyTo(const ClampingScrollPhysics())
             : const PageScrollPhysics().applyTo(widget.physics),
+        animationDuration: widget.animationDuration,
+        animationCurve: widget.animationCurve,
         children: _childrenWithKey,
       ),
     );
